@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "description": "BluePadel brand tokens, Tailwind preset, and logo assets — single source of truth for the BluePadel visual identity.",
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": false,
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "sideEffects": ["**/*.css"],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -24,9 +26,13 @@
     "./reset.css": "./dist/reset.css",
     "./assets/*": "./assets/*"
   },
-  "files": ["dist/**", "assets/**", "README.md"],
+  "files": [
+    "dist/**",
+    "assets/**",
+    "README.md"
+  ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -52,6 +58,8 @@
     "tailwindcss": ">=3.4.0"
   },
   "peerDependenciesMeta": {
-    "tailwindcss": { "optional": true }
+    "tailwindcss": {
+      "optional": true
+    }
   }
 }

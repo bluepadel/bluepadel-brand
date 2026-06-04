@@ -16,13 +16,11 @@ components); component libraries consume these tokens.
 Theme = re-point the semantic aliases. Dark theme ships as `[data-theme="dark"]`
 (architecture proven; light-only is the current shipped theme).
 
-## Install (GitHub Packages)
+## Install
+
+Published to the public npm registry — no auth required.
 
 ```bash
-# one-time auth (needs a PAT with read:packages)
-echo "@wardandpartners:registry=https://npm.pkg.github.com" >> ~/.npmrc
-echo "//npm.pkg.github.com/:_authToken=$GITHUB_PACKAGES_PAT" >> ~/.npmrc
-
 npm install @wardandpartners/bluepadel-brand
 ```
 
@@ -55,5 +53,6 @@ npm install
 npm run ci   # lint + typecheck + build (tsup → dist) + test
 ```
 
-Publish is automated: push a `vX.Y.Z` tag → `publish.yml` builds + publishes to
-GitHub Packages.
+Publish is automated: push a `vX.Y.Z` tag (or run the `publish` workflow
+manually) → builds + publishes to the public npm registry. Requires the
+`NPM_TOKEN` repo secret (an npmjs **Automation** token for the `@wardandpartners` org).
