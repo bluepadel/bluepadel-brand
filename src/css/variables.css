@@ -1,0 +1,157 @@
+/*
+ * BluePadel design tokens as CSS custom properties.
+ *
+ * Three layers:
+ *   1. PRIMITIVES (--bp-blue-800, --bp-neutral-50, …) — raw palette. Defined once.
+ *   2. SEMANTIC  (--bp-color-bg, --bp-color-text, …)  — intent aliases of the
+ *      primitives. Theme = swap these targets. Consuming apps reference ONLY these.
+ *   3. COMPONENT tokens live in each consuming app, referencing the semantic layer.
+ *
+ * Theme switching: set `data-theme="dark"` on <html>. `prefers-color-scheme`
+ * is honoured only when no explicit data-theme is set (see media query below).
+ */
+
+:root {
+  /* ---- 1. PRIMITIVES ------------------------------------------------------ */
+  --bp-blue-50: #e3f2fd;
+  --bp-blue-100: #bbdefb;
+  --bp-blue-200: #90caf9;
+  --bp-blue-300: #64b5f6;
+  --bp-blue-400: #42a5f5;
+  --bp-blue-500: #2196f3;
+  --bp-blue-600: #1e88e5;
+  --bp-blue-700: #1976d2;
+  --bp-blue-800: #1565c0;
+  --bp-blue-900: #0d47a1;
+
+  --bp-neutral-0: #ffffff;
+  --bp-neutral-50: #fafbfc;
+  --bp-neutral-100: #f1f3f5;
+  --bp-neutral-200: #e1e5ea;
+  --bp-neutral-300: #c7cdd3;
+  --bp-neutral-400: #9da5ad;
+  --bp-neutral-500: #6b7280;
+  --bp-neutral-600: #4b5563;
+  --bp-neutral-700: #374151;
+  --bp-neutral-800: #1f2937;
+  --bp-neutral-900: #0b1320;
+
+  --bp-green-50: #ecfdf3;
+  --bp-green-100: #d1fadf;
+  --bp-green-500: #16a34a;
+  --bp-green-700: #15803d;
+  --bp-amber-50: #fffbeb;
+  --bp-amber-100: #fef0c7;
+  --bp-amber-500: #f59e0b;
+  --bp-amber-700: #b45309;
+  --bp-red-50: #fef3f2;
+  --bp-red-100: #fee4e2;
+  --bp-red-500: #dc2626;
+  --bp-red-700: #b42318;
+  --bp-sky-50: #f0f9ff;
+  --bp-sky-100: #e0f2fe;
+  --bp-sky-500: #0284c7;
+  --bp-sky-700: #0369a1;
+
+  /* radius / shadow / type primitives */
+  --bp-radius-sm: 0.25rem;
+  --bp-radius-md: 0.5rem;
+  --bp-radius-lg: 0.75rem;
+  --bp-radius-xl: 1rem;
+  --bp-radius-full: 9999px;
+
+  --bp-shadow-sm: 0 1px 2px rgba(11, 19, 32, 0.06);
+  --bp-shadow-md: 0 4px 8px rgba(11, 19, 32, 0.1);
+  --bp-shadow-lg: 0 12px 24px rgba(11, 19, 32, 0.12);
+  --bp-shadow-xl: 0 24px 48px rgba(11, 19, 32, 0.16);
+
+  --bp-font-base: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --bp-font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --bp-font-mono: "JetBrains Mono", Consolas, monospace;
+
+  /* layout primitives (used by the app shell) */
+  --bp-sidebar-width: 240px;
+  --bp-sidebar-width-collapsed: 64px;
+  --bp-topbar-height: 64px;
+  --bp-content-max: 1280px;
+
+  /* ---- 2. SEMANTIC (LIGHT theme — the default) --------------------------- */
+  --bp-color-bg: var(--bp-neutral-50);
+  --bp-color-surface: var(--bp-neutral-0);
+  --bp-color-surface-raised: var(--bp-neutral-0);
+  --bp-color-surface-sunken: var(--bp-neutral-100);
+  --bp-color-overlay: rgba(11, 19, 32, 0.45);
+
+  --bp-color-text: var(--bp-neutral-800);
+  --bp-color-text-muted: var(--bp-neutral-500);
+  --bp-color-text-subtle: var(--bp-neutral-400);
+  --bp-color-text-inverse: var(--bp-neutral-0);
+  --bp-color-text-on-accent: var(--bp-neutral-0);
+
+  --bp-color-border: var(--bp-neutral-200);
+  --bp-color-border-strong: var(--bp-neutral-300);
+  --bp-color-focus-ring: var(--bp-blue-400);
+
+  --bp-color-primary: var(--bp-blue-800);
+  --bp-color-primary-hover: var(--bp-blue-700);
+  --bp-color-primary-active: var(--bp-blue-900);
+  --bp-color-primary-subtle: var(--bp-blue-50);
+  --bp-color-accent: var(--bp-blue-500);
+
+  --bp-color-success: var(--bp-green-500);
+  --bp-color-success-bg: var(--bp-green-50);
+  --bp-color-success-fg: var(--bp-green-700);
+  --bp-color-warning: var(--bp-amber-500);
+  --bp-color-warning-bg: var(--bp-amber-50);
+  --bp-color-warning-fg: var(--bp-amber-700);
+  --bp-color-danger: var(--bp-red-500);
+  --bp-color-danger-bg: var(--bp-red-50);
+  --bp-color-danger-fg: var(--bp-red-700);
+  --bp-color-info: var(--bp-sky-500);
+  --bp-color-info-bg: var(--bp-sky-50);
+  --bp-color-info-fg: var(--bp-sky-700);
+}
+
+/* ---- 2b. SEMANTIC (DARK theme) ------------------------------------------- *
+ * Light-only ships for now, but the architecture is proven: dark only ever
+ * re-points semantic aliases — no component CSS changes. Values are sane, not
+ * yet pixel-tuned (QA when dark is turned on).                               */
+:root[data-theme="dark"] {
+  --bp-color-bg: var(--bp-neutral-900);
+  --bp-color-surface: #111c2e;
+  --bp-color-surface-raised: #1b2840;
+  --bp-color-surface-sunken: #0a1019;
+  --bp-color-overlay: rgba(0, 0, 0, 0.6);
+
+  --bp-color-text: #e7ecf3;
+  --bp-color-text-muted: var(--bp-neutral-400);
+  --bp-color-text-subtle: var(--bp-neutral-500);
+  --bp-color-text-inverse: var(--bp-neutral-900);
+  --bp-color-text-on-accent: var(--bp-neutral-0);
+
+  --bp-color-border: #2a3953;
+  --bp-color-border-strong: #3a4d6e;
+  --bp-color-focus-ring: var(--bp-blue-400);
+
+  --bp-color-primary: var(--bp-blue-400);
+  --bp-color-primary-hover: var(--bp-blue-300);
+  --bp-color-primary-active: var(--bp-blue-500);
+  --bp-color-primary-subtle: #16263f;
+  --bp-color-accent: var(--bp-blue-300);
+
+  --bp-color-success-bg: #0f2a1c;
+  --bp-color-success-fg: #6ee7a8;
+  --bp-color-warning-bg: #2a210a;
+  --bp-color-warning-fg: #fbd38d;
+  --bp-color-danger-bg: #2a1414;
+  --bp-color-danger-fg: #fca5a5;
+  --bp-color-info-bg: #0a2233;
+  --bp-color-info-fg: #7dd3fc;
+}
+
+/* Respect OS preference ONLY when the app hasn't pinned a theme explicitly. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+  }
+}

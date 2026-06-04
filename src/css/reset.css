@@ -1,0 +1,47 @@
+/* Minimal, opinionated reset layered on top of the tokens. Pairs with (or
+ * stands in for) Tailwind Preflight. Sets the brand font + base colours. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  font-family: var(--bp-font-base);
+}
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  background: var(--bp-color-bg);
+  color: var(--bp-color-text);
+  -webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: var(--bp-color-primary);
+  text-decoration: none;
+}
+:focus-visible {
+  outline: 2px solid var(--bp-color-focus-ring);
+  outline-offset: 2px;
+}

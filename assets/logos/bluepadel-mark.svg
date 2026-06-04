@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 108 108" xmlns="http://www.w3.org/2000/svg" aria-label="BluePadel">
+  <rect width="108" height="108" rx="27" fill="#1565C0"/>
+  <path fill="#FFFFFF" d="M54 16C67 16 72 28 72 40C72 52 66 60 60 60L48 60C42 60 36 52 36 40C36 28 41 16 54 16Z"/>
+  <circle cx="44" cy="26" r="2.5" fill="#0C447C"/>
+  <circle cx="54" cy="26" r="2.5" fill="#0C447C"/>
+  <circle cx="64" cy="26" r="2.5" fill="#0C447C"/>
+  <circle cx="44" cy="38" r="2.5" fill="#0C447C"/>
+  <circle cx="54" cy="38" r="2.5" fill="#0C447C"/>
+  <circle cx="64" cy="38" r="2.5" fill="#0C447C"/>
+  <circle cx="44" cy="50" r="2.5" fill="#0C447C"/>
+  <circle cx="54" cy="50" r="2.5" fill="#0C447C"/>
+  <circle cx="64" cy="50" r="2.5" fill="#0C447C"/>
+  <path fill="#FFFFFF" d="M48 60L60 60L60 82Q60 87 54 87Q48 87 48 82Z"/>
+</svg>
