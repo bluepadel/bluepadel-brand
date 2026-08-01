@@ -1,5 +1,5 @@
 {
-  "name": "@wardandpartners/bluepadel-brand",
+  "name": "@bluepadel/bluepadel-brand",
   "version": "0.1.0",
   "description": "BluePadel brand tokens, Tailwind preset, and logo assets — single source of truth for the BluePadel visual identity.",
   "type": "module",
@@ -36,13 +36,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wardandpartners/bluepadel-brand.git"
+    "url": "git+https://github.com/bluepadel/bluepadel-brand.git"
   },
   "scripts": {
     "build": "tsup",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "sync-in": "bash scripts/sync-from-cowork.sh",
+    "gen:android": "npm run build && node scripts/generate-android.mjs",
     "ci": "npm run lint && npm run typecheck && npm run build && npm run test"
   },
   "devDependencies": {

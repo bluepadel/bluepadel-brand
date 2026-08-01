@@ -8,7 +8,7 @@ import { typography } from "./tokens/typography";
 /**
  * BluePadel Tailwind preset. Consumers extend it with one line:
  *
- *   import bluepadel from "@wardandpartners/bluepadel-brand/tailwind.preset";
+ *   import bluepadel from "@bluepadel/bluepadel-brand/tailwind.preset";
  *   export default { presets: [bluepadel], content: [...] } satisfies Config;
  *
  * Colour utilities are bound to the SEMANTIC CSS variables (var(--bp-color-*)),

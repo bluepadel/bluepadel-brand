@@ -1,5 +1,5 @@
 /**
- * @wardandpartners/bluepadel-brand — the single source of truth for the
+ * @bluepadel/bluepadel-brand — the single source of truth for the
  * BluePadel visual identity. v0.1.0 is tokens-only (no React components).
  *
  * Layers:
@@ -13,8 +13,10 @@ export { spacing } from "./tokens/spacing";
 export { radius } from "./tokens/radius";
 export { shadow } from "./tokens/shadow";
 export { semantic } from "./tokens/semantic";
+export { themes, light, dark } from "./tokens/themes";
 
 export type { Palette } from "./tokens/palette";
+export type { ThemeColors, Themes } from "./tokens/themes";
 export type { Typography } from "./tokens/typography";
 export type { Spacing } from "./tokens/spacing";
 export type { Radius } from "./tokens/radius";

@@ -1,4 +1,4 @@
-# @wardandpartners/bluepadel-brand
+# @bluepadel/bluepadel-brand
 
 Single source of truth for the **BluePadel** visual identity — design tokens,
 a Tailwind preset, and logo assets. v0.1.0 is **tokens-only** (no React
@@ -21,26 +21,26 @@ Theme = re-point the semantic aliases. Dark theme ships as `[data-theme="dark"]`
 Published to the public npm registry — no auth required.
 
 ```bash
-npm install @wardandpartners/bluepadel-brand
+npm install @bluepadel/bluepadel-brand
 ```
 
 ## Use
 
 ```ts
 // 1. tokens / Tailwind preset
-import bluepadel from "@wardandpartners/bluepadel-brand/tailwind.preset";
+import bluepadel from "@bluepadel/bluepadel-brand/tailwind.preset";
 // tailwind.config.ts:  export default { presets: [bluepadel], content: [...] }
 ```
 
 ```ts
 // 2. the CSS variables + reset (e.g. in main.tsx)
-import "@wardandpartners/bluepadel-brand/variables.css";
-import "@wardandpartners/bluepadel-brand/reset.css";
+import "@bluepadel/bluepadel-brand/variables.css";
+import "@bluepadel/bluepadel-brand/reset.css";
 ```
 
 ```ts
 // 3. raw tokens in TS when needed
-import { palette, semantic } from "@wardandpartners/bluepadel-brand";
+import { palette, semantic } from "@bluepadel/bluepadel-brand";
 ```
 
 After importing, prefer themeable utilities: `bg-surface`, `text-muted`,
@@ -55,4 +55,4 @@ npm run ci   # lint + typecheck + build (tsup → dist) + test
 
 Publish is automated: push a `vX.Y.Z` tag (or run the `publish` workflow
 manually) → builds + publishes to the public npm registry. Requires the
-`NPM_TOKEN` repo secret (an npmjs **Automation** token for the `@wardandpartners` org).
+`NPM_TOKEN` repo secret (an npmjs **Automation** token for the `@bluepadel` org).

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { palette, radius, semantic, shadow, spacing, typography } from "../src/index";
+import { dark, light, palette, radius, semantic, shadow, spacing, typography } from "../src/index";
 import preset from "../src/tailwind.preset";
 
 describe("bluepadel-brand tokens", () => {
@@ -36,5 +36,20 @@ describe("bluepadel-brand tokens", () => {
     const colors = preset.theme?.extend?.colors as Record<string, unknown>;
     expect(colors.surface).toBe("var(--bp-color-surface)");
     expect((colors.primary as Record<string, string>).DEFAULT).toBe("var(--bp-color-primary)");
+  });
+
+  // themes.ts is the resolved (hex) twin of css/variables.css, consumed by the
+  // non-CSS generators (Android/Compose). Keep it tied to the palette so it
+  // can't drift back to an off-brand primary like the old Android #1E40AF.
+  it("themes resolve to the brand palette (light + dark)", () => {
+    expect(light.primary).toBe(palette.blue[800]); // brand #1565C0
+    expect(light.bg).toBe(palette.neutral[50]);
+    expect(light.textMuted).toBe(palette.neutral[500]);
+    expect(dark.primary).toBe(palette.blue[400]); // brightened for dark
+    expect(dark.surface).toBe("#111C2E");
+    // Every semantic value is a concrete hex or rgba — never a CSS var.
+    for (const v of [...Object.values(light), ...Object.values(dark)]) {
+      if (typeof v === "string") expect(v).toMatch(/^(#[0-9A-Fa-f]{6}|rgba?\()/);
+    }
   });
 });
