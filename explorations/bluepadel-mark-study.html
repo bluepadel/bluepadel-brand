@@ -1,0 +1,455 @@
+<title>BluePadel Mark Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --ground:#eef1f6; --panel:#ffffff; --panel-2:#f6f8fb;
+    --ink:#0b1320; --muted:#5a6577; --subtle:#8a94a6; --line:#e3e8f0; --line-2:#eef2f7;
+    --navy:#0d47a1; --blue:#1565c0; --blue-bright:#1e88e5; --sky:#2196f3;
+    --ball:#ffb612; --ball-ink:#7a5300;
+    --good:#16a34a; --warn:#f59e0b;
+    --grad:linear-gradient(140deg,#0d47a1 0%,#1565c0 48%,#2196f3 100%);
+    --shadow:0 1px 2px rgba(13,42,90,.05), 0 14px 40px -18px rgba(13,42,90,.28);
+    --shadow-sm:0 1px 2px rgba(13,42,90,.05), 0 6px 18px -12px rgba(13,42,90,.3);
+    --tile-radius:26px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#080d18; --panel:#101a2e; --panel-2:#0c1424;
+      --ink:#e9eff8; --muted:#9fadc2; --subtle:#6c7a91; --line:#1e2c46; --line-2:#182338;
+      --navy:#0d47a1; --blue:#1e88e5; --blue-bright:#2196f3;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 18px 44px -18px rgba(0,0,0,.6);
+      --shadow-sm:0 1px 2px rgba(0,0,0,.4), 0 8px 20px -12px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#080d18; --panel:#101a2e; --panel-2:#0c1424;
+    --ink:#e9eff8; --muted:#9fadc2; --subtle:#6c7a91; --line:#1e2c46; --line-2:#182338;
+    --navy:#0d47a1; --blue:#1e88e5; --blue-bright:#2196f3;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 18px 44px -18px rgba(0,0,0,.6);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4), 0 8px 20px -12px rgba(0,0,0,.55);
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;
+    -webkit-font-smoothing:antialiased;margin:0}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:Sora,Inter,sans-serif;letter-spacing:-.02em;text-wrap:balance;margin:0}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-bright);font-weight:600}
+  a{color:var(--blue-bright)}
+
+  /* ---- top bar ---- */
+  .topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--ground) 86%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .topbar .wrap{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px}
+  .brandrow{display:flex;align-items:center;gap:11px;font-family:Sora;font-weight:700;letter-spacing:-.02em}
+  .brandrow small{font-weight:500;color:var(--muted);font-family:Inter;letter-spacing:0}
+  .themebtn{margin-left:auto;border:1px solid var(--line);background:var(--panel);color:var(--muted);
+    border-radius:10px;padding:7px 12px;font:600 12.5px Inter;cursor:pointer;display:flex;gap:7px;align-items:center}
+  .themebtn:hover{color:var(--ink)}
+
+  /* ---- hero ---- */
+  .hero{padding:64px 0 30px}
+  .hero h1{font-size:clamp(30px,5.2vw,52px);font-weight:800;line-height:1.04}
+  .hero .lede{font-size:clamp(16px,2.1vw,19px);color:var(--muted);max-width:60ch;margin:18px 0 0}
+  .slogan-chip{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:var(--panel);
+    border:1px solid var(--line);border-radius:999px;padding:9px 16px 9px 12px;box-shadow:var(--shadow-sm);font-weight:600}
+  .slogan-chip .dot{width:12px;height:12px;border-radius:50%;background:var(--ball);box-shadow:0 0 0 4px color-mix(in srgb,var(--ball) 22%,transparent)}
+  .slogan-chip b{font-family:Sora}
+  .slogan-chip span{color:var(--subtle);font-weight:500;font-size:13px}
+
+  section{padding:34px 0}
+  .rule{height:1px;background:var(--line);margin:8px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(21px,3vw,27px);font-weight:700}
+  .sec-head .n{font-family:"JetBrains Mono",monospace;color:var(--subtle);font-size:13px;font-weight:600}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+  .cols{display:grid;gap:22px}
+  @media(min-width:760px){.two{grid-template-columns:1fr 1fr}.diag{grid-template-columns:auto 1fr}}
+
+  /* ---- current mark diagnosis ---- */
+  .diag{display:grid;gap:26px;align-items:center;padding:26px}
+  .now-tile{width:132px;height:132px;border-radius:var(--tile-radius);background:#1565C0;display:grid;place-items:center;box-shadow:var(--shadow)}
+  .diag ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+  .diag li{display:flex;gap:12px;font-size:14.5px}
+  .diag li b{font-family:Sora}
+  .x{flex:0 0 auto;width:22px;height:22px;border-radius:6px;background:color-mix(in srgb,#dc2626 14%,transparent);color:#dc2626;display:grid;place-items:center;font-weight:800;font-size:13px;margin-top:1px}
+
+  .principles{display:grid;gap:16px}
+  @media(min-width:720px){.principles{grid-template-columns:repeat(4,1fr)}}
+  .principle{background:var(--panel-2);border:1px solid var(--line-2);border-radius:14px;padding:16px}
+  .principle .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-bright);font-weight:600}
+  .principle h3{font-size:15.5px;font-weight:600;margin:9px 0 5px;font-family:Sora}
+  .principle p{margin:0;font-size:13px;color:var(--muted)}
+
+  /* ---- direction plate ---- */
+  .plate{padding:26px;margin-bottom:22px;overflow:hidden}
+  .plate-head{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+  .plate-badge{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:12px;color:#fff;background:var(--grad);
+    border-radius:8px;padding:5px 9px}
+  .plate-head h3{font-size:20px;font-weight:700;font-family:Sora}
+  .plate-head .risk{margin-left:auto;font:600 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+  .plate-body{display:grid;gap:26px}
+  @media(min-width:820px){.plate-body{grid-template-columns:340px 1fr}}
+
+  .specimens{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spec{border:1px solid var(--line);border-radius:14px;display:grid;place-items:center;padding:18px;min-height:118px;background:var(--panel-2)}
+  .spec.tile{background:var(--grad);border:none}
+  .spec.ink{background:#0b1320;border:none}
+  .spec.full{grid-column:1/-1;min-height:auto;padding:16px 20px}
+  .spec .lab{position:absolute;font:600 9.5px "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase}
+  .spec{position:relative}
+  .spec .lab{top:8px;left:10px;color:var(--subtle)}
+  .spec.tile .lab,.spec.ink .lab{color:rgba(255,255,255,.55)}
+
+  /* wordmark lockup */
+  .wm{display:flex;align-items:center;gap:12px;font-family:Sora;letter-spacing:-.02em}
+  .wm .txt{font-weight:400;font-size:26px;color:var(--ink)}
+  .wm .txt b{font-weight:800}
+  .spec.ink .wm .txt{color:#fff}
+  .wm-slogan{display:flex;flex-direction:column;gap:3px}
+  .wm-slogan .s{font:600 12.5px Inter;color:var(--muted)}
+  .spec.ink .wm-slogan .s{color:rgba(255,255,255,.7)}
+
+  .rationale h4{font:600 13px Inter;margin:0 0 6px;color:var(--subtle);text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-family:"JetBrains Mono",monospace}
+  .rationale p{margin:0 0 14px;font-size:14.5px;color:var(--ink)}
+  .rationale p.t{color:var(--muted);font-size:13.5px}
+  .tag{display:inline-block;font:600 12px Inter;background:color-mix(in srgb,var(--blue-bright) 12%,transparent);
+    color:var(--blue-bright);border-radius:7px;padding:3px 9px;margin:2px 6px 2px 0}
+
+  /* recommendation */
+  .rec{background:var(--grad);border-radius:20px;padding:34px;color:#fff;box-shadow:var(--shadow)}
+  .rec .eyebrow{color:rgba(255,255,255,.72)}
+  .rec h2{color:#fff;font-size:clamp(20px,3vw,26px);margin:8px 0 12px}
+  .rec p{color:rgba(255,255,255,.9);max-width:66ch;margin:0 0 10px}
+  .rec b{color:#fff}
+  .rec .ball{color:var(--ball)}
+  .steps{display:grid;gap:10px;margin-top:18px}
+  .step{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:12px 14px;font-size:14px}
+  .step .num{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--ball)}
+
+  footer{padding:40px 0 60px;color:var(--subtle);font-size:12.5px}
+  .swatches{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
+  .sw{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:10px;padding:7px 12px;background:var(--panel);font:600 12px "JetBrains Mono",monospace}
+  .sw i{width:16px;height:16px;border-radius:5px;display:block}
+</style>
+
+<div class="topbar"><div class="wrap">
+  <div class="brandrow">
+    <svg width="26" height="26" viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" rx="28" fill="url(#tg)"/><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d47a1"/><stop offset="1" stop-color="#2196f3"/></linearGradient></defs><circle cx="60" cy="60" r="20" fill="#fff"/><circle cx="60" cy="60" r="8" fill="#ffb612"/></svg>
+    BluePadel <small>· mark study</small>
+  </div>
+  <button class="themebtn" onclick="(function(){var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark');})()">◐ Theme</button>
+</div></div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Brand identity · exploration deck</p>
+    <h1>The slogan lands.<br>The mark should carry the same weight.</h1>
+    <p class="lede">A senior marketer read the current icon as “clip-art” — a flat, literal racket in a generic app tile that signals <em>startup</em> rather than a company that has re-invented how padel is scored. The words are already there. Five directions below take the mark from safe evolution to bold departure — same palette, same story, more conviction.</p>
+    <div class="slogan-chip"><span class="dot"></span><b>Every game, automatically scored.</b><span>— the line we keep</span></div>
+  </header>
+
+  <!-- WHERE WE ARE -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>Where we are — and why it reads as clip-art</h2></div>
+    <div class="panel diag cols">
+      <div class="now-tile">
+        <svg width="86" height="86" viewBox="0 0 108 108" aria-label="Current BluePadel mark">
+          <path fill="#fff" d="M54 16C67 16 72 28 72 40C72 52 66 60 60 60L48 60C42 60 36 52 36 40C36 28 41 16 54 16Z"/>
+          <g fill="#0C447C"><circle cx="44" cy="26" r="2.5"/><circle cx="54" cy="26" r="2.5"/><circle cx="64" cy="26" r="2.5"/><circle cx="44" cy="38" r="2.5"/><circle cx="54" cy="38" r="2.5"/><circle cx="64" cy="38" r="2.5"/><circle cx="44" cy="50" r="2.5"/><circle cx="54" cy="50" r="2.5"/><circle cx="64" cy="50" r="2.5"/></g>
+          <path fill="#fff" d="M48 60L60 60L60 82Q60 87 54 87Q48 87 48 82Z"/>
+        </svg>
+      </div>
+      <ul>
+        <li><span class="x">1</span><span><b>It’s literal.</b> A racket drawn as a racket says “padel app.” It doesn’t say what makes us different — that we <em>score</em> the game no one else can.</span></li>
+        <li><span class="x">2</span><span><b>One flat weight.</b> A single white silhouette knocked out of a flat blue square. No hierarchy, no craft, nothing that survives being shrunk to a favicon or blown up on a court wall.</span></li>
+        <li><span class="x">3</span><span><b>The tile is the default.</b> A stock rounded-square is what every side-project ships. The container is doing no work.</span></li>
+        <li><span class="x">4</span><span><b>Nothing is ownable.</b> Swap the racket for any sport’s gear and the logo still “works” — which means it isn’t <em>ours</em>.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>What a stronger mark has to do</h2></div>
+    <div class="principles">
+      <div class="principle"><div class="k">Own an idea</div><h3>Precision, not equipment</h3><p>Encode the thing only we do — the ball, tracked and scored — not the gear anyone can draw.</p></div>
+      <div class="principle"><div class="k">Build a system</div><h3>Mark + wordmark + accent</h3><p>A symbol that stands alone, a wordmark with a real cut, and the ball-yellow used as one deliberate spark.</p></div>
+      <div class="principle"><div class="k">Earn the scale</div><h3>Favicon → court wall</h3><p>Legible at 16px, confident at 3 metres. Geometry that holds up reversed, mono, and one-colour.</p></div>
+      <div class="principle"><div class="k">Feel premium</div><h3>Considered, not clip-art</h3><p>Deliberate proportion, restraint, and a container that means something — the signals of a company, not a project.</p></div>
+    </div>
+  </section>
+
+  <!-- DIRECTIONS -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Five directions — safe evolution → bold departure</h2></div>
+
+    <!-- A: Elevated racket -->
+    <div class="panel plate">
+      <div class="plate-head"><span class="plate-badge">A</span><h3>The Elevated Racket</h3><span class="risk">Evolution · lowest risk</span></div>
+      <div class="plate-body">
+        <div class="specimens">
+          <div class="spec tile"><span class="lab">app</span>
+            <svg width="74" height="74" viewBox="0 0 120 120" aria-label="Direction A mark">
+              <g transform="rotate(-18 60 60)">
+                <path fill="#fff" d="M60 20c19 0 27 16 27 33s-11 27-27 27-27-10-27-27S41 20 60 20Z"/>
+                <g fill="#1565c0"><circle cx="49" cy="42" r="3"/><circle cx="60" cy="42" r="3"/><circle cx="71" cy="42" r="3"/><circle cx="49" cy="54" r="3"/><circle cx="60" cy="54" r="3"/><circle cx="71" cy="54" r="3"/><circle cx="49" cy="66" r="3"/><circle cx="60" cy="66" r="3"/><circle cx="71" cy="66" r="3"/></g>
+                <path fill="#fff" d="M53 80h14l-3 20a4 4 0 0 1-8 0Z"/>
+                <circle cx="83" cy="30" r="8" fill="#ffb612"/>
+              </g>
+            </svg>
+          </div>
+          <div class="spec ink"><span class="lab">reversed</span>
+            <svg width="74" height="74" viewBox="0 0 120 120" aria-hidden="true">
+              <g transform="rotate(-18 60 60)">
+                <path fill="none" stroke="#fff" stroke-width="5" d="M60 20c19 0 27 16 27 33s-11 27-27 27-27-10-27-27S41 20 60 20Z"/>
+                <circle cx="60" cy="54" r="7.5" fill="#ffb612"/>
+                <path fill="#fff" d="M54 80h12l-2.5 20a3.5 3.5 0 0 1-7 0Z"/>
+              </g>
+            </svg>
+          </div>
+          <div class="spec full"><span class="lab" style="position:static"></span>
+            <div class="wm">
+              <svg width="34" height="34" viewBox="0 0 120 120" aria-hidden="true"><g transform="rotate(-18 60 60)"><path fill="none" stroke="var(--blue)" stroke-width="6" d="M60 22c18 0 26 15 26 31s-10 26-26 26-26-10-26-26S42 22 60 22Z"/><circle cx="60" cy="53" r="8" fill="#ffb612"/><path fill="var(--blue)" d="M54 79h12l-2.5 19a3.5 3.5 0 0 1-7 0Z"/></g></svg>
+              <span class="txt">Blue<b>Padel</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="rationale">
+          <h4>The idea</h4>
+          <p>Keep the racket equity the brand already has — but treat it like a logo, not a sticker. Truer proportion, an open perf pattern, and a <b>ball-yellow ball in play</b> on the sweet spot: the one detail that says “a point, being scored.”</p>
+          <h4>Why it works</h4>
+          <p class="t">Zero recognition risk — anyone who knows the app still knows it. The yellow ball introduces the scoring story and gives us an ownable accent. Reads cleanly reversed and as a line-mark.</p>
+          <h4>The trade-off</h4>
+          <p class="t">Still fundamentally “a racket.” It’s a better version of today, not a re-position. If the goal is to stop looking like a padel <em>app</em>, this is the least of the five that gets us there.</p>
+          <span class="tag">Recognisable</span><span class="tag">Fast to ship</span><span class="tag">Least ownable</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- B: Perf monogram -->
+    <div class="panel plate">
+      <div class="plate-head"><span class="plate-badge">B</span><h3>The Perforation Monogram</h3><span class="risk">Balanced · keeps padel DNA</span></div>
+      <div class="plate-body">
+        <div class="specimens">
+          <div class="spec tile"><span class="lab">app</span>
+            <svg width="78" height="78" viewBox="0 0 120 120" aria-label="Direction B mark" id="perfA"></svg>
+          </div>
+          <div class="spec ink"><span class="lab">reversed</span>
+            <svg width="78" height="78" viewBox="0 0 120 120" aria-hidden="true" id="perfB"></svg>
+          </div>
+          <div class="spec full">
+            <div class="wm">
+              <svg width="34" height="34" viewBox="0 0 120 120" aria-hidden="true" id="perfC"></svg>
+              <span class="txt">Blue<b>Padel</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="rationale">
+          <h4>The idea</h4>
+          <p>Only padel rackets are perforated — so the holes, not the racket outline, are the real signature. Arrange them into a <b>“P” built from the perforation grid</b>, with a single ball-yellow hole as the live point.</p>
+          <h4>Why it works</h4>
+          <p class="t">Abstract enough to be a proper monogram, specific enough that it could only be padel. It’s a system: the dot-grid becomes a texture for backgrounds, loading states, court graphics. Superb at favicon size.</p>
+          <h4>The trade-off</h4>
+          <p class="t">A step away from instant “that’s the racket” recognition — it asks the viewer to read a letter first. Needs the wordmark alongside it for a season while it earns its meaning.</p>
+          <span class="tag">Ownable</span><span class="tag">Systematic</span><span class="tag">Scales to 16px</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- C: Trajectory -->
+    <div class="panel plate">
+      <div class="plate-head"><span class="plate-badge">C</span><h3>The Trajectory</h3><span class="risk">Story-led · our differentiator</span></div>
+      <div class="plate-body">
+        <div class="specimens">
+          <div class="spec tile"><span class="lab">app</span>
+            <svg width="78" height="78" viewBox="0 0 120 120" aria-label="Direction C mark" id="trajA"></svg>
+          </div>
+          <div class="spec ink"><span class="lab">reversed</span>
+            <svg width="78" height="78" viewBox="0 0 120 120" aria-hidden="true" id="trajB"></svg>
+          </div>
+          <div class="spec full">
+            <div class="wm">
+              <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true" id="trajC"></svg>
+              <span class="txt">Blue<b>Padel</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="rationale">
+          <h4>The idea</h4>
+          <p>The mark <em>is</em> the product: a ball’s flight, tracked as a rising arc of points that resolve into one <b>ball-yellow ball</b> — the moment a shot becomes a score. The tracking dots double as the racket’s perforations.</p>
+          <h4>Why it works</h4>
+          <p class="t">Nobody else in padel can honestly use this mark, because nobody else tracks the ball. It carries the slogan visually — “automatically scored” drawn, not just written — and animates beautifully in product and on the web.</p>
+          <h4>The trade-off</h4>
+          <p class="t">The most conceptual of the five; it trades literal padel-recognition for meaning. Best paired with the wordmark until the story is known.</p>
+          <span class="tag">Most differentiated</span><span class="tag">On-message</span><span class="tag">Animatable</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- D: The Eye -->
+    <div class="panel plate">
+      <div class="plate-head"><span class="plate-badge">D</span><h3>The Eye</h3><span class="risk">Bold · tech-forward</span></div>
+      <div class="plate-body">
+        <div class="specimens">
+          <div class="spec tile"><span class="lab">app</span>
+            <svg width="78" height="78" viewBox="0 0 120 120" aria-label="Direction D mark" id="eyeA"></svg>
+          </div>
+          <div class="spec ink"><span class="lab">reversed</span>
+            <svg width="78" height="78" viewBox="0 0 120 120" aria-hidden="true" id="eyeB"></svg>
+          </div>
+          <div class="spec full">
+            <div class="wm">
+              <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true" id="eyeC"></svg>
+              <span class="txt">Blue<b>Padel</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="rationale">
+          <h4>The idea</h4>
+          <p>Lean into the hardware that makes it real — the <b>BluePadel Eye</b>. A lens/aperture ring closing on a ball-yellow centre that reads as both an iris and the ball. The camera that never misses a point.</p>
+          <h4>Why it works</h4>
+          <p class="t">Signals precision technology, not sports equipment — exactly the “not a startup” reposition. Distinctive silhouette, premium at any size, and it ties the brand to the patented sensing system rather than the racket.</p>
+          <h4>The trade-off</h4>
+          <p class="t">Furthest from “padel” at a glance; leans on the wordmark to place the category. Risks reading generic-tech if the execution isn’t crisp.</p>
+          <span class="tag">Premium</span><span class="tag">Ties to the Eye / IP</span><span class="tag">Least “padel”</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- E: Wordmark-led -->
+    <div class="panel plate">
+      <div class="plate-head"><span class="plate-badge">E</span><h3>Wordmark-led + “bp” monogram</h3><span class="risk">Mature · type-forward</span></div>
+      <div class="plate-body">
+        <div class="specimens">
+          <div class="spec tile"><span class="lab">app</span>
+            <svg width="78" height="78" viewBox="0 0 120 120" aria-label="Direction E mark" id="bpA"></svg>
+          </div>
+          <div class="spec ink"><span class="lab">reversed</span>
+            <svg width="78" height="78" viewBox="0 0 120 120" aria-hidden="true" id="bpB"></svg>
+          </div>
+          <div class="spec full" style="justify-items:start">
+            <div class="wm-slogan">
+              <span class="wm" style="gap:0"><span class="txt" style="font-size:30px">Blue<b>Padel</b></span><span style="width:9px;height:9px;border-radius:50%;background:#ffb612;margin-left:7px;align-self:flex-end;margin-bottom:6px"></span></span>
+              <span class="s">Every game, automatically scored.</span>
+            </div>
+          </div>
+        </div>
+        <div class="rationale">
+          <h4>The idea</h4>
+          <p>Let the name do the work. A confident <b>BluePadel wordmark</b> with a real weight contrast (light “Blue”, heavy “Padel”) and a single ball-yellow point as the full-stop. The icon shrinks to a tight <b>“bp” monogram</b> for app and avatar use.</p>
+          <h4>Why it works</h4>
+          <p class="t">The most grown-up move — established brands lead with type. Nothing to “get,” instantly legible, and the yellow full-stop quietly plants the ball/point idea. Cheapest to apply consistently everywhere.</p>
+          <h4>The trade-off</h4>
+          <p class="t">Least distinctive <em>symbol</em> — a wordmark needs a strong custom cut to avoid feeling plain, and gives us less to play with in tiny/icon-only spots than a bespoke mark.</p>
+          <span class="tag">Mature</span><span class="tag">Always legible</span><span class="tag">Weakest standalone icon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOMMENDATION -->
+  <section>
+    <div class="rec">
+      <p class="eyebrow">A route through it</p>
+      <h2>Shortlist <span class="ball">C — Trajectory</span> and <span class="ball">B — Perforation Monogram</span>.</h2>
+      <p><b>C</b> is the one that can only be ours: it draws the slogan the exec already loves. <b>B</b> is the safer sibling — unmistakably padel, endlessly systematic, and brilliant small. Both pair naturally with the <b>E</b> wordmark, so whichever symbol wins, the type system comes along.</p>
+      <p>If the board wants zero recognition risk this quarter, <b>A</b> ships in a week and still adds the scoring ball. Keep <b>D — The Eye</b> in reserve for the hardware/IP story.</p>
+      <div class="steps">
+        <div class="step"><span class="num">1</span><span>Pick <b>one symbol direction</b> to develop (my vote: C, with B as the hedge) — not a final logo, a direction to refine.</span></div>
+        <div class="step"><span class="num">2</span><span>Lock the <b>wordmark (E)</b> and the ball-yellow accent rule in parallel — that’s reusable under any symbol.</span></div>
+        <div class="step"><span class="num">3</span><span>Take the chosen direction to <b>proper vector artwork + a one-page identity</b> (clear-space, min-size, mono/reversed, app-icon, court-wall) before it touches the product or site.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="sec-head" style="margin-bottom:6px"><h2 style="font-size:16px">Palette &amp; type held constant across all five</h2></div>
+    <div class="swatches">
+      <span class="sw"><i style="background:#0d47a1"></i>Navy 0D47A1</span>
+      <span class="sw"><i style="background:#1565c0"></i>Blue 1565C0</span>
+      <span class="sw"><i style="background:#2196f3"></i>Sky 2196F3</span>
+      <span class="sw"><i style="background:#ffb612"></i>Ball FFB612</span>
+    </div>
+    <p style="margin-top:14px">Type shown: <b>Sora</b> (display), <b>Inter</b> (the brand UI face, unchanged), <b>JetBrains Mono</b> (scores &amp; labels). All marks are exploratory SVG sketches to choose a <em>direction</em> — not final artwork. Palette and slogan (“Every game, automatically scored”) held constant so we’re comparing form, not colour. BluePadel (Pty) Ltd · internal review.</p>
+  </footer>
+</div>
+
+<script>
+  // ---- generative marks (kept as JS so the geometry is exact + editable) ----
+  const NS="http://www.w3.org/2000/svg";
+  function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function dot(p,x,y,r,f){p.appendChild(el("circle",{cx:x,cy:y,r:r,fill:f}));}
+
+  // B — Perforation "P" monogram. grid 4 cols x 6 rows; P pattern.
+  const P=[
+    "1111",
+    "1001",
+    "1001",
+    "1111",
+    "1000",
+    "1000"];
+  function perf(id,dotc,ball,faint){
+    const s=document.getElementById(id); if(!s)return;
+    const cols=4,rows=6,x0=36,y0=26,gap=16;
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+      const on=P[r][c]==="1";
+      const cx=x0+c*gap, cy=y0+r*gap;
+      if(on) dot(s,cx,cy,4.4,dotc);
+      else if(faint) dot(s,cx,cy,3,faint);
+    }
+    // one live point (top-right of the bowl) in ball-yellow
+    dot(s,x0+3*gap,y0+0*gap,4.4,ball);
+  }
+  perf("perfA","#ffffff","#ffb612","rgba(255,255,255,.22)");
+  perf("perfB","#ffffff","#ffb612","rgba(255,255,255,.16)");
+  perf("perfC","var(--blue)","#ffb612","rgba(21,101,192,.16)");
+
+  // C — Trajectory: arc of growing dots resolving to a ball-yellow ball.
+  function traj(id,dotc,ball){
+    const s=document.getElementById(id); if(!s)return;
+    // parabola from (28,92) up to ball at (90,34)
+    const pts=[[28,92],[38,80],[49,68],[60,57],[71,47],[80,40]];
+    pts.forEach((p,i)=>dot(s,p[0],p[1],2.2+i*0.9,dotc));
+    // faint racket-perf echo behind
+    dot(s,90,34,12,ball);
+    s.appendChild(el("circle",{cx:90,cy:34,r:12,fill:"none",stroke:ball,"stroke-opacity":".0"}));
+  }
+  traj("trajA","rgba(255,255,255,.92)","#ffb612");
+  traj("trajB","rgba(255,255,255,.9)","#ffb612");
+  traj("trajC","var(--blue)","#ffb612");
+
+  // D — The Eye: aperture ring + ball-yellow centre.
+  function eye(id,ringc,ball,bg){
+    const s=document.getElementById(id); if(!s)return;
+    s.appendChild(el("circle",{cx:60,cy:60,r:34,fill:"none",stroke:ringc,"stroke-width":6}));
+    // aperture blades (6 short chords)
+    for(let i=0;i<6;i++){
+      const a=(i/6)*Math.PI*2, a2=a+0.9;
+      const r1=34, r2=15;
+      const x1=60+r1*Math.cos(a), y1=60+r1*Math.sin(a);
+      const x2=60+r2*Math.cos(a2), y2=60+r2*Math.sin(a2);
+      s.appendChild(el("line",{x1,y1,x2,y2,stroke:ringc,"stroke-width":3.2,"stroke-linecap":"round","stroke-opacity":".55"}));
+    }
+    dot(s,60,60,13,ball);
+  }
+  eye("eyeA","#ffffff","#ffb612");
+  eye("eyeB","#ffffff","#ffb612");
+  eye("eyeC","var(--blue)","#ffb612");
+
+  // E — bp monogram (geometric) with ball-yellow point.
+  function bp(id,c,ball){
+    const s=document.getElementById(id); if(!s)return;
+    s.appendChild(el("text",{x:60,y:60,"text-anchor":"middle","dominant-baseline":"central",
+      "font-family":"Sora, sans-serif","font-weight":"800","font-size":"58",fill:c,"letter-spacing":"-3"})).textContent="bp";
+    dot(s,88,78,7,ball);
+  }
+  bp("bpA","#ffffff","#ffb612");
+  bp("bpB","#ffffff","#ffb612");
+</script>

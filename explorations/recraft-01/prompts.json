@@ -1,0 +1,8 @@
+[
+ {"id":"c1_ball_arc","prompt":"Minimal geometric logo icon for a sports-tech brand: a single padel ball with one clean curved trajectory arc sweeping upward, flat vector, bold simple shapes, generous negative space, two colours only deep blue and navy, centered on white, no text, app icon"},
+ {"id":"c2_monogram","prompt":"Modern geometric monogram combining the letters B and P, interlocked, built from clean thick strokes, tech startup logo, flat vector, deep blue and navy, negative space, centered on white, no extra elements","colors":[[21,101,192],[13,71,161]]},
+ {"id":"c3_vision_ring","prompt":"Minimalist logo mark: a small padel ball centered inside concentric camera-aperture tracking rings, symbolising automatic computer-vision scoring, flat geometric vector, deep blue with a lighter blue accent, lots of negative space, centered on white, no text","colors":[[21,101,192],[66,165,245],[13,71,161]]},
+ {"id":"c4_court_icon","prompt":"Simplified top-down padel court reduced to a minimal emblem inside a rounded square app icon, single ball as a dot, clean geometric flat vector, deep blue and white, modern, centered, no text","colors":[[21,101,192],[13,71,161]]},
+ {"id":"c5_target_lock","prompt":"Precision logo icon: a minimal crosshair target reticle locking onto a padel ball, conveying trust and accurate scoring, flat geometric vector, two colours deep blue and navy, negative space, centered on white, no text","colors":[[21,101,192],[13,71,161]]},
+ {"id":"c6_pulse_score","prompt":"Abstract logo mark where a padel ball trajectory turns into a digital scoreline waveform, motion and data, minimal flat vector, deep blue with lighter blue accent, geometric, centered on white background, no text","colors":[[21,101,192],[66,165,245],[11,19,32]]}
+]
