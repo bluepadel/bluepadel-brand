@@ -7,8 +7,7 @@
 // clients/BluePadel WearOS/mobile/.../ui/theme/BluePadelTokens.kt.
 
 import { mkdirSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
 
 import { dark, light, palette } from "../dist/index.js";
 
