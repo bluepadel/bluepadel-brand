@@ -1,0 +1,52 @@
+[
+ {
+  "id": "hero-home",
+  "size": "1820x1024",
+  "prompt": "Editorial sports photograph, indoor padel court with glass walls, plain brand-blue walls with no signage, blue court surface, two adult male players in matching plain brand-blue (#1565C0) short-sleeve sports shirts with deep navy collar trim and deep navy shorts, holding padel rackets (solid perforated paddle with holes, no strings), mid-rally at the net, bright even arena lighting, premium sportswear campaign, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "hero-away",
+  "size": "1820x1024",
+  "prompt": "Editorial sports photograph, indoor padel court with glass walls and plain walls with no signage, two adult players in plain crisp white short-sleeve sports shirts with brand-blue (#1565C0) collar trim, white shorts and plain white caps, holding padel rackets (solid perforated paddle with holes, no strings), celebrating a point with a high five, bright clean daylight, premium sportswear campaign, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "lifestyle-cap",
+  "size": "1365x1024",
+  "prompt": "Lifestyle sports photograph, close crop of a padel player wearing a plain brand blue (#1565C0) cap and a plain brand blue short-sleeve sports shirt, holding a padel racket (solid perforated paddle, no strings), outside a glass court, warm late-afternoon light, Cape Town mountains softly blurred in the background, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "prod-home-mens",
+  "bg": "sky",
+  "prompt": "Studio product photo, ghost mannequin, men's short-sleeve round-neck padel sports shirt in brand blue (#1565C0) with deep navy (#0D47A1) collar and sleeve-cuff trim, lightweight technical fabric, front view, perfectly centred and symmetrical, soft shadow, plain pale blue background, e-commerce, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "prod-away-mens",
+  "bg": "sky",
+  "prompt": "Studio product photo, ghost mannequin, men's short-sleeve round-neck padel sports shirt in white with brand blue (#1565C0) collar and sleeve-cuff trim, lightweight technical fabric, front view, perfectly centred and symmetrical, soft shadow, plain pale blue background, e-commerce, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "prod-home-ladies",
+  "bg": "sky",
+  "prompt": "Studio product photo, ghost mannequin, women's fitted short-sleeve round-neck padel sports shirt in brand blue (#1565C0) with deep navy (#0D47A1) collar trim, lightweight technical fabric, front view, perfectly centred and symmetrical, soft shadow, plain pale blue background, e-commerce, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "prod-away-vest",
+  "bg": "sky",
+  "prompt": "Studio product photo, ghost mannequin, women's sleeveless racerback padel sports vest in white with brand blue (#1565C0) neck and armhole trim, lightweight technical fabric, front view, perfectly centred and symmetrical, soft shadow, plain pale blue background, e-commerce, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "prod-cap-blue",
+  "bg": "sky",
+  "prompt": "Studio product photo of a plain brand blue (#1565C0) sports cap with curved peak, front view facing the camera straight on, plain front panel, soft shadow, plain pale blue background, e-commerce, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "prod-cap-white",
+  "bg": "sky",
+  "prompt": "Studio product photo of a plain white sports cap with brand blue (#1565C0) peak edging, front view facing the camera straight on, plain front panel, soft shadow, plain pale blue background, e-commerce, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ },
+ {
+  "id": "prod-shorts",
+  "bg": "sky",
+  "prompt": "Studio product photo, flat lay, plain men's padel sports shorts in deep navy blue (#0D47A1), lightweight technical fabric, front view, centred, soft shadow, plain pale blue background, e-commerce, completely plain garments with no logos, no graphics, no stripes, no text, no prints anywhere; no brand marks on shoes, walls or equipment; no black clothing"
+ }
+]
