@@ -34,14 +34,17 @@ def inpaint(img, boxes):
     return Image.fromarray(cv2.inpaint(a, mask, 7, cv2.INPAINT_TELEA))
 
 
-def denavy(img, box, thresh=80, lo=0.55, span=0.6):
+def denavy(img, box, thresh=80, lo=0.55, span=0.6, col=None, cool_only=False):
     a = np.array(img).astype(np.float32)
     x0, y0, x1, y1 = box
     r = a[y0:y1, x0:x1]
     lum = r.max(axis=2)
     dark = lum < thresh
+    if cool_only:  # fabric only: skip warm darks (skin shadow, hair, beard)
+        dark &= r[..., 2] >= r[..., 0]
     t = (lum / thresh)[..., None]
-    r[dark] = (NAVY * (lo + span * t))[dark]
+    base = NAVY if col is None else np.array(col, dtype=np.float32)
+    r[dark] = (base * (lo + span * t))[dark]
     a[y0:y1, x0:x1] = r
     return Image.fromarray(a.clip(0, 255).astype(np.uint8))
 
@@ -86,7 +89,20 @@ JOBS = {
     "lifestyle-cap": lambda im: im,
 }
 
+def far_shirt(im):
+    """Far player's near-black shirt -> brand blue, around (not over) his beard."""
+    for box in [(1340, 470, 1388, 585), (1415, 470, 1470, 585), (1388, 490, 1415, 585)]:
+        im = denavy(im, box, 90, 0.5, 0.75, (21, 101, 192), True)
+    return im
+
+
+# v3 hero (2026-11-01): accurate padel court, stringless paddles, player facing the camera.
+JOBS["hero-home"] = lambda im: paste_mark(
+    far_shirt(inpaint(im, [(428, 588, 456, 613), (495, 815, 552, 847)])),
+    "white", 615, 440, 44)
+SOURCES = {"hero-home": pathlib.Path("out-v3/hero-home-v3b.webp")}
+
 for name, job in JOBS.items():
-    im = Image.open(SRC / f"{name}.webp").convert("RGB")
+    im = Image.open(SOURCES.get(name, SRC / f"{name}.webp")).convert("RGB")
     job(im).save(OUT / f"{name}.webp", "WEBP", quality=90)
     print("OK", name)
