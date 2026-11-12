@@ -43,7 +43,6 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "sync-in": "bash scripts/sync-from-cowork.sh",
     "gen:android": "npm run build && node scripts/generate-android.mjs",
     "ci": "npm run lint && npm run typecheck && npm run build && npm run test"
   },
